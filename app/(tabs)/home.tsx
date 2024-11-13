@@ -5,7 +5,10 @@ import {
   GestureHandlerRootView,
   TouchableOpacity,
 } from "react-native-gesture-handler";
+import { router } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
+// import Toast from 'react-native-root-toast';
+// import { useCart } from '@/components/CartContext';
 import Banner from "@/components/Banner";
 import { Product, ProductCategory } from "@/types";
 import { fetchProducts } from "@/services/product-data";
@@ -24,8 +27,27 @@ const Home = () => {
     try {
       const fetchProductsData = async () => {
         const data = await fetchProducts();
-        console.log(data);
+        if (data) {
+          // console.log(data);
+
+          const categories = data.map((product: Product) => product.category);
+          categories.unshift("All");
+          const uniqueCategories = Array.from(new Set(categories)).map(
+            (category) => ({
+              id: category,
+              selected: selectedCategory === category,
+            })
+          );
+          console.log(uniqueCategories);
+
+          setProducts(data);
+          setShownProducts(data);
+          setProductCatgories(categories);
+        } else {
+          console.log("Failed to fetch products");
+        }
       };
+
       fetchProductsData();
     } catch (error) {
       console.log(error);
@@ -107,11 +129,7 @@ const Home = () => {
                       <Text
                         className={`text-sm mr-4 font-[Sora-Regular] p-3 rounded-lg 
                         ${item.selected ? "text-white" : "text-[#313131]"}
-                        ${
-                          item.selected
-                            ? "bg-app_orange_color "
-                            : "bg-[#EDEDED] "
-                        }
+                        ${item.selected ? "bg-orange-500 " : "bg-[#EDEDED] "}
                         `}
                       >
                         {item.id}
