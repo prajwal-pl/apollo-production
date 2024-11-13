@@ -15,20 +15,29 @@ export default function Index() {
           source={require("../assets/images/index_bg_image.png")}
         >
           <View className="flex h-[60%]" />
-          <View className="flex w-[80%]">
-            <Text className="text-white text-3xl text-center font-[Sora-SemiBold]">
+          <View className="flex w-[80%] items-center self-center">
+            <Text className="text-white text-4xl text-center font-[Sora-SemiBold] ">
               Fall in Love with Coffee in Blissful Delight!
             </Text>
 
             <Text className="pt-3 text-[#A2A2A2] text-center font-[Sora-Regular]">
               Welcome to our cozy coffee corner, where every cup is a delightful
-              for you.
+              one for you.
             </Text>
             <TouchableOpacity
-              className="bg-[#C57C3E] mt-10 p-3 rounded-lg items-center"
+              className="bg-orange-600  mt-10 p-3 rounded-lg "
+              style={{
+                backgroundColor: "#C57C3E",
+                width: 400,
+                justifyContent: "center",
+                marginTop: 40,
+                padding: 12,
+                borderRadius: 8,
+                alignItems: "center",
+              }}
               onPress={() => router.push("/(tabs)/home")}
             >
-              <Text className="text-xl color-white font-[Sora-SemiBold]">
+              <Text className="text-xl text-center w-full text-white font-[Sora-SemiBold]">
                 Get Started
               </Text>
             </TouchableOpacity>
